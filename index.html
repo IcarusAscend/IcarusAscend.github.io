@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Icarus Ascend — Elevate Your Ideas</title>
+<style>
+  /* Google Fonts Montserrat */
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap');
+
+  /* Reset & basics */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: #121212;
+    color: #eee;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  a {
+    color: #D4AF37;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  a:hover, a:focus {
+    color: #fff;
+  }
+
+  /* Scrollbar (dark, slim) */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #181818;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #D4AF37;
+    border-radius: 4px;
+  }
+
+  /* Container max width */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.2rem;
+  }
+
+  /* Header/Nav */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: #181818cc;
+    backdrop-filter: saturate(180%) blur(10px);
+    border-bottom: 1px solid #2a2a2a;
+    z-index: 9999;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.6);
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    cursor: pointer;
+  }
+  .logo-container img {
+    height: 36px;
+    width: 36px;
+    object-fit: contain;
+  }
+  .logo-text {
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 1.2px;
+    color: #D4AF37;
+    user-select: none;
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+  }
+  nav ul li {
+    font-weight: 500;
+  }
+  nav ul li a {
+    font-size: 1rem;
+    user-select: none;
+  }
+  nav ul li a:hover {
+    color: #fff;
+    border-bottom: 2px solid #D4AF37;
+    padding-bottom: 2px;
+  }
+
+  /* Hero Section */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 1rem;
+  }
+  #hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #D4AF37;
+    text-shadow: 0 0 8px #D4AF37aa;
+    margin-bottom: 0.5rem;
+  }
+  #hero p {
+    font-size: 1.3rem;
+    max-width: 650px;
+    margin-bottom: 2rem;
+    color: #ddd;
+    text-shadow: 0 0 3px #000;
+  }
+  #hero .cta-btn {
+    background: transparent;
+    border: 2px solid #D4AF37;
+    color: #D4AF37;
+    font-weight: 600;
+    padding: 0.75rem 2.2rem;
+    font-size: 1.1rem;
+    border-radius: 32px;
+    cursor: pointer;
+    box-shadow: 0 0 12px #D4AF37aa;
+    transition: all 0.3s ease;
+    user-select: none;
+  }
+  #hero .cta-btn:hover {
+    background: #D4AF37;
+    color: #121212;
+    box-shadow: 0 0 25px #FFD700;
+  }
+
+  /* Sections common styling */
+  section {
+    padding: 5rem 0 4rem 0;
+  }
+  section h2 {
+    text-align: center;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #D4AF37;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 8px #D4AF37aa;
+  }
+  section .section-subtitle {
+    text-align: center;
+    color: #bbb;
+    margin-bottom: 3rem;
+    font-size: 1.1rem;
+    font-weight: 400;
+  }
+
+  /* Services */
+  #services .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .service-card {
+    background: #1f1f1f;
+    border-radius: 12px;
+    padding: 2rem 1.8rem;
+    box-shadow: 0 0 12px rgb(212 175 55 / 0.25);
+    transition: transform 0.25s ease, box-shadow 0.3s ease;
+    cursor: default;
+  }
+  .service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 0 25px #D4AF37cc;
+  }
+  .service-card h3 {
+    margin-bottom: 1rem;
+    color: #FFD966;
+    font-weight: 600;
+    font-size: 1.5rem;
+  }
+  .service-card p {
+    font-size: 1rem;
+    color: #ccc;
+    line-height: 1.5;
+  }
+  .service-card a {
+    display: inline-block;
+    margin-top: 1.3rem;
+    color: #FFD966;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+  .service-card a:hover {
+    text-decoration: underline;
+  }
+
+  /* Portfolio */
+  #portfolio .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+    gap: 2.4rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .portfolio-card {
+    background: #1e1e1e;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgb(212 175 55 / 0.3);
+    transition: transform 0.3s ease, box-shadow 0.4s ease;
+    cursor: default;
+  }
+  .portfolio-card:hover {
+    transform: scale(1.04);
+    box-shadow: 0 0 30px #D4AF37dd;
+  }
+  .portfolio-img {
+    background: #333;
+    height: 180px;
+    background-image: url('https://source.unsplash.com/collection/1127163/300x180'); /* placeholder */
+    background-position: center;
+    background-size: cover;
+  }
+  .portfolio-content {
+    padding: 1rem 1.5rem 1.8rem 1.5rem;
+  }
+  .portfolio-content h4 {
+    color: #FFD966;
+    margin-bottom: 0.6rem;
+    font-weight: 600;
+    font-size: 1.2rem;
+  }
+  .portfolio-content p {
+    font-size: 0.95rem;
+    color: #ccc;
+    line-height: 1.4;
+  }
+
+  /* Contact */
+  #contact .contact-container {
+    max-width: 650px;
+    margin: 0 auto;
+    background: #1f1f1f;
+    border-radius: 14px;
+    padding: 3rem 2rem 3.5rem 2rem;
+    box-shadow: 0 0 20px rgb(212 175 55 / 0.3);
+  }
+  #contact form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.3rem;
+  }
+  #contact label {
+    font-weight: 600;
+    color: #D4AF37;
+  }
+  #contact input, #contact textarea {
+    background: #121212;
+    border: 2px solid #333;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    color: #eee;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    resize: none;
+  }
+  #contact input:focus, #contact textarea:focus {
+    outline: none;
+    border-color: #D4AF37;
+    box-shadow: 0 0 10px #D4AF37aa;
+  }
+  #contact textarea {
+    min-height: 120px;
+  }
+  #contact .btn-submit {
+    background: transparent;
+    border: 2px solid #D4AF37;
+    color: #D4AF37;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 0.85rem 0;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 0 15px #D4AF37aa;
+    transition: all 0.3s ease;
+    user-select: none;
+    margin-top: 1rem;
+  }
+  #contact .btn-submit:hover {
+    background: #D4AF37;
+    color: #121212;
+    box-shadow: 0 0 35px #FFD700;
+  }
+
+  /* Info block for contact details */
+  .contact-info {
+    margin-top: 2.2rem;
+    color: #ccc;
+    font-size: 1rem;
+    text-align: center;
+  }
+  .contact-info strong {
+    color: #FFD966;
+  }
+
+  /* About / Team */
+  #about .about-text {
+    max-width: 900px;
+    margin: 0 auto 3.5rem auto;
+    font-size: 1.1rem;
+    color: #ddd;
+    text-align: center;
+    line-height: 1.55;
+  }
+  #about .team-grid {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(210px,1fr));
+    gap: 2rem;
+  }
+  .team-member {
+    background: #1f1f1f;
+    border-radius: 14px;
+    padding: 1.8rem 1.4rem 2rem 1.4rem;
+    box-shadow: 0 0 12px rgb(212 175 55 / 0.2);
+    transition: box-shadow 0.3s ease;
+    cursor: default;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .team-member:hover {
+    box-shadow: 0 0 30px #D4AF37cc;
+  }
+  .team-photo {
+    background: #333;
+    width: 120px;
+    height: 120px;
+    border-radius: 100%;
+    margin-bottom: 1rem;
+    object-fit: cover;
+    box-shadow: 0 0 12px #D4AF37aa;
+  }
+  .team-member.blank-photo {
+    background: linear-gradient(135deg, #444 25%, #222 75%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #666;
+    font-size: 0.9rem;
+    user-select: none;
+  }
+  .team-name {
+    font-weight: 700;
+    color: #FFD966;
+    font-size: 1.15rem;
+    margin-bottom: 0.3rem;
+  }
+  .team-role {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #D4AF37cc;
+    margin-bottom: 0.7rem;
+  }
+  .team-desc {
+    font-size: 0.9rem;
+    color: #ccc;
+    line-height: 1.4;
+  }
+
+  /* Footer */
+  footer {
+    background: #181818;
+    padding: 1.8rem 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #666;
+    position: relative;
+    user-select: none;
+  }
+  footer .footer-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+  }
+  footer .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #D4AF37;
+    font-weight: 700;
+    font-size: 1.2rem;
+    user-select: none;
+  }
+  footer .footer-logo img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+  }
+  footer nav.footer-nav {
+    display: flex;
+    gap: 1.6rem;
+    flex-wrap: wrap;
+  }
+  footer nav.footer-nav a {
+    color: #999;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  footer nav.footer-nav a:hover {
+    color: #D4AF37;
+  }
+  footer .social-icons {
+    display: flex;
+    gap: 1.4rem;
+  }
+  footer .social-icons a svg {
+    fill: #999;
+    width: 22px;
+    height: 22px;
+    transition: fill 0.3s ease;
+  }
+  footer .social-icons a:hover svg {
+    fill: #D4AF37;
+  }
+  footer .copyright {
+    font-size: 0.75rem;
+    color: #444;
+    position: absolute;
+    bottom: 4px;
+    right: 8px;
+  }
+
+  /* Responsive small tweaks */
+  @media (max-width: 640px) {
+    nav ul {
+      gap: 1rem;
+    }
+    #hero h1 {
+      font-size: 2.4rem;
+    }
+    section h2 {
+      font-size: 2.2rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="container" aria-label="Primary navigation">
+    <a href="#hero" class="logo-container" aria-label="Icarus Ascend homepage">
+      <!-- Replace 'logo.png' with your logo file path -->
+      <img src="logo.png" alt="Icarus Ascend logo" onerror="this.style.display='none'" />
+      <span class="logo-text">Icarus Ascend</span>
+    </a>
+    <ul>
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#about">About Us</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+<section id="hero" role="banner" aria-label="Welcome section">
+  <h1>Icarus Ascend</h1>
+  <p>Cutting-edge app development and innovation, elevating your business ideas to new heights with expert craftsmanship and relentless refinement.</p>
+  <button class="cta-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})" aria-label="Get in touch with Icarus Ascend">Get a Quote</button>
+</section>
+
+<section id="services" aria-labelledby="services-title">
+  <h2 id="services-title">Our Services</h2>
+  <p class="section-subtitle">Empowering businesses with premium app solutions and growth strategies.</p>
+  <div class="services-grid">
+    <article class="service-card" tabindex="0" role="region" aria-label="App Development Service">
+      <h3>Custom App Development</h3>
+      <p>From concept to deployment, we craft tailor-made mobile and web apps designed to perfectly fit your business needs and exceed expectations.</p>
+      <a href="#contact" aria-label="Contact us about custom app development">Inquire now →</a>
+    </article>
+    <article class="service-card" tabindex="0" role="region" aria-label="App Refining Service">
+      <h3>App Refinement & Optimization</h3>
+      <p>Enhance performance, fix bugs, and elevate user experience with our expert app refinement and continuous improvement services.</p>
+      <a href="#contact" aria-label="Contact us about app refinement services">Get started →</a>
+    </article>
+    <article class="service-card" tabindex="0" role="region" aria-label="App Creation Service">
+      <h3>Rapid App Creation</h3>
+      <p>Need a quick MVP or prototype? We accelerate app creation without compromising quality, so you can launch and test fast.</p>
+      <a href="#contact" aria-label="Contact us about rapid app creation">Reach out →</a>
+    </article>
+    <article class="service-card" tabindex="0" role="region" aria-label="App Marketing Service">
+      <h3>App Marketing & Growth</h3>
+      <p>Boost your app’s visibility and downloads with data-driven marketing strategies crafted by our in-house experts.</p>
+      <a href="#contact" aria-label="Contact us about app marketing">Contact us →</a>
+    </article>
+    <article class="service-card" tabindex="0" role="region" aria-label="App Consulting Service">
+      <h3>Consulting & Strategy</h3>
+      <p>Leverage our deep industry knowledge to strategize your app development roadmap and maximize ROI.</p>
+      <a href="#contact" aria-label="Contact us about consulting services">Talk to us →</a>
+    </article>
+  </div>
+</section>
+
+<section id="portfolio" aria-labelledby="portfolio-title">
+  <h2 id="portfolio-title">Our Portfolio</h2>
+  <p class="section-subtitle">A glimpse at how we've helped major players and niche innovators elevate their apps.</p>
+  <div class="portfolio-grid">
+
+    <article class="portfolio-card" tabindex="0" role="region" aria-label="Tinder Redesign Project">
+      <div class="portfolio-img" style="background-image: url('https://source.unsplash.com/300x180/?dating,app');"></div>
+      <div class="portfolio-content">
+        <h4>Tinder Redesign</h4>
+        <p>Collaborated on UI overhaul to increase user engagement by 18%. Improved swipe animation and match notifications for a smoother experience.</p>
+      </div>
+    </article>
+
+    <article class="portfolio-card" tabindex="0" role="region" aria-label="Finvest Finance Tracker">
+      <div class="portfolio-img" style="background-image: url('https://source.unsplash.com/300x180/?finance,money');"></div>
+      <div class="portfolio-content">
+        <h4>Finvest Finance Tracker</h4>
+        <p>Implemented advanced budgeting tools and security features that helped the app double its active user base in 6 months.</p>
+      </div>
+    </article>
+
+    <article class="portfolio-card" tabindex="0" role="region" aria-label="BizFlow CRM Enhancement">
+      <div class="portfolio-img" style="background-image: url('https://source.unsplash.com/300x180/?business,software');"></div>
+      <div class="portfolio-content">
+        <h4>BizFlow CRM Enhancement</h4>
+        <p>Developed a custom analytics dashboard integrated with client workflows, leading to a 25% increase in sales productivity.</p>
+      </div>
+    </article>
+
+    <article class="portfolio-card" tabindex="0" role="region" aria-label="PayPath Mobile Wallet">
+      <div class="portfolio-img" style="background-image: url('https://source.unsplash.com/300x180/?wallet,mobile');"></div>
+      <div class="portfolio-content">
+        <h4>PayPath Mobile Wallet</h4>
+        <p>Designed and integrated biometric authentication features to ensure top-tier security and ease of access for users.</p>
+      </div>
+    </article>
+
+    <article class="portfolio-card" tabindex="0" role="region" aria-label="HealthPlus App Upgrade">
+      <div class="portfolio-img" style="background-image: url('https://source.unsplash.com/300x180/?health,app');"></div>
+      <div class="portfolio-content">
+        <h4>HealthPlus App Upgrade</h4>
+        <p>Led UX redesign focusing on accessibility, boosting daily active users by 30% and improving user retention.</p>
+      </div>
+    </article>
+
+    <article class="portfolio-card" tabindex="0" role="region" aria-label="MarketMate Insights Tool">
+      <div class="portfolio-img" style="background-image: url('https://source.unsplash.com/300x180/?analytics,business');"></div>
+      <div class="portfolio-content">
+        <h4>MarketMate Insights Tool</h4>
+        <p>Integrated real-time data analytics and predictive models to empower business decision-making for clients worldwide.</p>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section id="contact" aria-labelledby="contact-title">
+  <h2 id="contact-title">Contact Us</h2>
+  <p class="section-subtitle">Ready to elevate your app? Get in touch and let's start building the future.</p>
+  <div class="contact-container">
+    <form id="contactForm" aria-label="Contact form for Icarus Ascend" onsubmit="event.preventDefault(); alert('Thank you for reaching out! We will get back to you soon.'); this.reset();">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" placeholder="Your full name" required aria-required="true" />
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" placeholder="you@example.com" required aria-required="true" />
+      <label for="message">Message</label>
+      <textarea id="message" name="message" placeholder="Write your message here..." required aria-required="true"></textarea>
+      <button type="submit" class="btn-submit" aria-label="Send message to Icarus Ascend">Send Message</button>
+    </form>
+    <div class="contact-info" aria-live="polite" aria-atomic="true" tabindex="0">
+      <p><strong>Email:</strong> <a href="mailto:1carus4scend@gmail.com" style="color:#FFD966;">1carus4scend@gmail.com</a></p>
+      <p><strong>Phone:</strong> <a href="tel:+13479413270" style="color:#FFD966;">(347) 941-3270</a></p>
+      <p><strong>Headquarters:</strong> 404 Ascend Avenue, Suite 900, New York, NY 10018</p>
+    </div>
+  </div>
+</section>
+
+<section id="about" aria-labelledby="about-title">
+  <h2 id="about-title">About Us</h2>
+  <p class="about-text">
+    At Icarus Ascend, we don’t just build apps — we elevate entire businesses. With over a decade of experience partnering with Fortune 500 companies and agile startups alike, our team of seasoned developers, designers, and strategists consistently deliver robust, scalable, and innovative solutions that empower growth and redefine digital experiences. Our passion for refining every line of code and pixel of design sets us apart as industry leaders dedicated to excellence and client success.
+  </p>
+
+  <div class="team-grid" role="list" aria-label="Our leadership and development team">
+
+    <!-- CEO blank photo & name -->
+    <article class="team-member" role="listitem" tabindex="0" aria-label="Chief Executive Officer and Top Developer">
+      <div class="team-photo blank-photo" aria-hidden="true">CEO Photo</div>
+      <div class="team-name" aria-label="CEO name" tabindex="0" style="color:#D4AF37;">[Your Name Here]</div>
+      <div class="team-role">Chief Executive Officer & Lead Developer</div>
+      <div class="team-desc" tabindex="0">
+        Visionary leader and coding maestro with 15+ years at the forefront of app innovation. Spearheaded breakthroughs that propelled client revenues beyond expectations.
+      </div>
+    </article>
+
+    <!-- 10 Fake Team Members -->
+    <article class="team-member" role="listitem" tabindex="0" aria-label="Sarah Johnson, Senior UI/UX Designer">
+      <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Johnson photo" class="team-photo" />
+      <div class="team-name">Sarah Johnson</div>
+      <div class="team-role">Senior UI/UX Designer</div>
+      <div class="team-desc" tabindex="0">
+        Graduated from Rhode Island School of Design. Crafted intuitive interfaces for over 50 apps, earning the 2022 UX Design Innovator award.
+      </div>
+    </article>
+
+    <article class="team-member" role="listitem" tabindex="0" aria-label="Michael Lee, Backend Architect">
+      <img src="https://randomuser.me/api/portraits/men/35.jpg" alt="Michael Lee photo" class="team-photo" />
+      <div class="team-name">Michael Lee</div>
+      <div class="team-role">Backend Architect</div>
+      <div class="team-desc" tabindex="0">
+        MIT Computer Science alum. Designed scalable cloud infrastructures powering apps with 99.99% uptime. Published 3 papers on microservices architecture.
+      </div>
+    </article>
+
+    <article class="team-member" role="listitem" tabindex="0" aria-label="Aisha Patel, Mobile Developer">
+      <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Aisha Patel photo" class="team-photo" />
+      <div class="team-name">Aisha Patel</div>
+      <div class="team-role">Mobile Developer</div>
+      <div class="team-desc" tabindex="0">
+        Stanford graduate. Expert in Flutter & React Native. Led development of 12 cross-platform apps with over 2 million combined downloads.
+      </div>
+    </article>
+
+    <article class="team-member" role="listitem" tabindex="0" aria-label="David Kim, DevOps Engineer">
+      <img src="https://randomuser.me/api/portraits/men/28.jpg" alt="David Kim photo" class="team-photo" />
+      <div class="team-name">David Kim</div>
+      <div class="team-role">DevOps Engineer</div>
+      <div class="team-desc" tabindex="0">
+        Caltech graduate. Mastered CI/CD pipelines, reducing deployment times by 40% and automating 100+ production workflows.
+      </div>
+    </article>
+
+    <article class="team-member" role="listitem" tabindex="0" aria-label="Elena Garcia, QA Lead">
+      <img src="https://randomuser.me/api/portraits/women/22.jpg" alt="Elena Garcia photo" class="team-photo" />
+      <div class="team-name">Elena Garcia</div>
+      <div class="team-role">QA Lead</div>
+      <div class="team-desc" tabindex="0">
+        University of Washington alumna. Established rigorous testing protocols slashing bugs by 70% and boosting app stability.
+      </div>
+    </article>
+
+    <article class="team-member" role="listitem" tabindex="0" aria-label="Jamal Thompson, Marketing Strategist">
+      <img src="https://randomuser.me/api/portraits/men/52.jpg" alt="Jamal Thompson photo" class="team-photo" />
+      <div class="team-name">Jamal Thompson</div>
+      <div class="team-role">Marketing Strategist</div>
+      <div class="team-desc" tabindex="0">
+        Wharton School grad. Architect of campaigns that doubled app user acquisition for clients in fintech and health sectors.
+      </div>
+    </article>
+
+    <article class="team-member" role="listitem" tabindex="0" aria-label="Olivia Chen, Frontend Developer">
+      <img src="https://randomuser.me/api/portraits/women/31.jpg" alt="Olivia Chen photo" class="team-photo" />
+      <div class="team-name">Olivia Chen</div>
+      <div class="team-role">Frontend Developer</div>
+      <div class="team-desc" tabindex="0">
+        Harvard CS graduate. Specializes in React & Vue.js with a focus on performance and accessibility. Contributed to 8 high-profile web apps.
+      </div>
+    </article>
+
+    <article class="team-member" role="listitem" tabindex="0" aria-label="Carlos Ramirez, Data Scientist">
+      <img src="https://randomuser.me/api/portraits/men/62.jpg" alt="Carlos Ramirez photo" class="team-photo" />
+      <div class="team-name">Carlos Ramirez</div>
+      <div class="team-role">Data Scientist</div>
+      <div class="team-desc" tabindex="0">
+        UC Berkeley graduate. Developed predictive analytics models increasing client app retention rates by 22%.
+      </div>
+    </article>
+
+    <article class="team-member" role="listitem" tabindex="0" aria-label="Maya Foster, Product Manager">
+      <img src="https://randomuser.me/api/portraits/women/29.jpg" alt="Maya Foster photo" class="team-photo" />
+      <div class="team-name">Maya Foster</div>
+      <div class="team-role">Product Manager</div>
+      <div class="team-desc" tabindex="0">
+        NYU Stern MBA. Coordinates agile teams and client relations, ensuring timely delivery and stellar app quality.
+      </div>
+    </article>
+
+    <article class="team-member" role="listitem" tabindex="0" aria-label="Ethan Brooks, Security Analyst">
+      <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Ethan Brooks photo" class="team-photo" />
+      <div class="team-name">Ethan Brooks</div>
+      <div class="team-role">Security Analyst</div>
+      <div class="team-desc" tabindex="0">
+        Carnegie Mellon graduate. Expert in app security audits and penetration testing, keeping client apps safe from cyber threats.
+      </div>
+    </article>
+
+  </div>
+</section>
+
+</main>
+
+<footer role="contentinfo" aria-label="Footer with navigation and social links">
+  <div class="footer-container container">
+    <a href="#hero" class="footer-logo" aria-label="Icarus Ascend homepage">
+      <img src="logo.png" alt="Icarus Ascend logo" onerror="this.style.display='none'"/>
+      Icarus Ascend
+    </a>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="#hero">Home</a>
+      <a href="#services">Services</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#contact">Contact</a>
+      <a href="#about">About Us</a>
+    </nav>
+    <div class="social-icons" role="list" aria-label="Social media links">
+      <a href="#" aria-label="Instagram" role="listitem" tabindex="0">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm.75 2a1.75 1.75 0 00-1.75 1.75v8.5A1.75 1.75 0 008.5 16h7a1.75 1.75 0 001.75-1.75v-8.5A1.75 1.75 0 0015.5 4h-7zm7.5 1.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12 7.25a4.75 4.75 0 110 9.5 4.75 4.75 0 010-9.5zm0 2a2.75 2.75 0 100 5.5 2.75 2.75 0 000-5.5z"/></svg>
+      </a>
+      <a href="#" aria-label="Facebook" role="listitem" tabindex="0">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 8H7v4h2v12h5v-12h3.642L18 8h-4v-2c0-.771.352-1 1-1h3V3h-4c-3 0-5 2-5 5v2z"/></svg>
+      </a>
+      <a href="#" aria-label="Twitter X" role="listitem" tabindex="0">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22.46 6c-.77.35-1.6.6-2.46.7a4.3 4.3 0 001.9-2.38 8.6 8.6 0 01-2.7 1.03 4.28 4.28 0 00-7.3 3.9 12.15 12.15 0 01-8.83-4.5 4.28 4.28 0 001.33 5.72 4.25 4.25 0 01-1.94-.53v.05a4.28 4.28 0 003.44 4.2 4.28 4.28 0 01-1.93.07 4.28 4.28 0 004 2.98A8.58 8.58 0 012 19.54a12.1 12.1 0 006.56 1.93c7.88 0 12.2-6.53 12.2-12.2 0-.19 0-.39-.01-.58A8.7 8.7 0 0024 6.1a8.55 8.55 0 01-2.54.7z"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="copyright">© 2025 Icarus Ascend</div>
+</footer>
+
+</body>
+</html>
